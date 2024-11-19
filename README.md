@@ -43,7 +43,7 @@
 
 10. Install Torch and Torchvision:
     ```bash
-    pip install torch==2.2.0 torchvision --index-url https://download.pytorch.org/whl/cu118
+    pip install torch==2.3.1 torchvision --index-url https://download.pytorch.org/whl/cu118
     ```
 
 11. Navigate to `venv\Lib\site-packages\torch\lib`
@@ -52,14 +52,18 @@
 12. Copy `cublas64_11.dll` and `cusparse64_11.dll` from ZLUDA (`cublas.dll` and `cusparse.dll` respectively) and paste them here.
 
 
-13. *** IMPORTANT *** Before running ComfyUI, you must apply the following changes in `model_management.py` and `cuda_malloc.py`. Both files are located in `ComfyUI\comfy`:
-    * [model_management.py](https://github.com/zubenelakrab/ComfyUI_AMD_ZLUDA/commit/9ade8ca17156c7e18949f07180c1aee976b1d0d6)
-    * [cuda_malloc.py](https://github.com/zubenelakrab/ComfyUI_AMD_ZLUDA/commit/b3b993d194bdbdd67c1178a95f1fe823e13b7ff6)
+13. 使用 `replacement/<版本号>/model_management.py` 中的文件对应你的ComfyUI版本替换，否则原版会报找不到定义的错误。
+*IMPORTANT* Before running ComfyUI, you must apply the following changes in `model_management.py` located in `ComfyUI\comfy`:
+
+    * [replacement\0.2.7\model_management.py](https://github.com/zubenelakrab/ComfyUI_AMD_ZLUDA/commit/9ade8ca17156c7e18949f07180c1aee976b1d0d6)
+
+    * 此处不需要覆盖 [cuda_malloc.py](https://github.com/zubenelakrab/ComfyUI_AMD_ZLUDA/commit/b3b993d194bdbdd67c1178a95f1fe823e13b7ff6),启动项附带参数 --disable-cuda-malloc 规避了对于此文件的替换验证。
           
-14. Run the main script:
+14. Run the main script (规避 `cuda_malloc.py` 的未验证):
     ```bash
-    python main.py
+    python main.py --disable-cuda-malloc
     ```
 
 Now, ComfyUI should be up and running using AMD with ZLUDA on Windows.
 
+注意：不要使用原版的 dll文件 和 py文件直接替换，亲测一堆BUG，这个文件示例已经旧了。需要根据你的版本根据以上方法从安装的文件进行复制或者修改后复制再覆盖，只有replacement目录下的文件可以直接覆盖到对应的ComfyUI版本。该仓库拷贝自 https://github.com/zubenelakrab/ComfyUI_AMD_ZLUDA
