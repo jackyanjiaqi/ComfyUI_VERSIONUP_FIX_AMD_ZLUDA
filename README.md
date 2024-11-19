@@ -55,9 +55,9 @@
 13. 使用 `replacement/<版本号>/model_management.py` 中的文件对应你的ComfyUI版本替换，否则原版会报找不到定义的错误。
 *IMPORTANT* Before running ComfyUI, you must apply the following changes in `model_management.py` located in `ComfyUI\comfy`:
 
-    * [replacement\0.2.7\model_management.py](https://github.com/zubenelakrab/ComfyUI_AMD_ZLUDA/commit/9ade8ca17156c7e18949f07180c1aee976b1d0d6)
+    * [replacement\0.2.7\model_management.py](https://github.com/jackyanjiaqi/ComfyUI_VERSIONUP_FIX_AMD_ZLUDA/commit/f834b7df59775a6e5d56a62a6f1f145189a2ce3d)
 
-    * 此处不需要覆盖 [cuda_malloc.py](https://github.com/zubenelakrab/ComfyUI_AMD_ZLUDA/commit/b3b993d194bdbdd67c1178a95f1fe823e13b7ff6),启动项附带参数 --disable-cuda-malloc 规避了对于此文件的替换验证。
+    * 此处不需要覆盖 [cuda_malloc.py](https://github.com/jackyanjiaqi/ComfyUI_VERSIONUP_FIX_AMD_ZLUDA/blob/main/cuda_malloc.py),启动项附带参数 --disable-cuda-malloc 规避了对于此文件的替换验证。
           
 14. Run the main script (规避 `cuda_malloc.py` 的未验证):
     ```bash
